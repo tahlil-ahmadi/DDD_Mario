@@ -1,7 +1,7 @@
 ﻿using Framework.Core;
 using Framework.Domain;
 
-namespace PartyManagement.Domain.Model
+namespace PartyManagement.Domain.Model.Parties
 {
     public class Phone : ValueObject
     {

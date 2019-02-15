@@ -1,6 +1,7 @@
 ﻿using NHibernate.Mapping.ByCode;
 using NHibernate.Mapping.ByCode.Conformist;
 using PartyManagement.Domain.Model;
+using PartyManagement.Domain.Model.Parties;
 
 namespace PartyManagement.Persistence.NH.Mappings
 {
@@ -11,6 +12,7 @@ namespace PartyManagement.Persistence.NH.Mappings
             Lazy(false);
             Table("Parties");
             Id(a=>a.Id);
+            Property(a=>a.State, z=>z.Type<PartyStateMapping>());
             IdBag(a=>a.Phones, mapper =>
             {
                 mapper.Table("Phones");

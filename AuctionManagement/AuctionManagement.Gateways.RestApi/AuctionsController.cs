@@ -19,7 +19,6 @@ namespace AuctionManagement.Gateways.RestApi
         [HttpPost]
         public void Post(OpenAuctionCommand command)
         {
-            var user = this.User;
             _bus.Dispatch(command);
         }
 

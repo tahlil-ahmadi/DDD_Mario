@@ -1,24 +1,24 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Autofac;
 using Framework.Application;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace AuctionManagement.Config
 {
-    //TODO: refactor this and move to it's own place (replace with autofac)
     public class IocCommandBus : ICommandBus
     {
-        private readonly IServiceProvider _serviceProvider;
-        public IocCommandBus(IServiceProvider serviceProvider)
+        private readonly ILifetimeScope _lifetimeScope;
+        public IocCommandBus(ILifetimeScope lifetimeScope)
         {
-            _serviceProvider = serviceProvider;
+            _lifetimeScope = lifetimeScope;
         }
         public void Dispatch<T>(T command)
         {
-            using (var scope = _serviceProvider.CreateScope())
+            using (var scope = _lifetimeScope.BeginLifetimeScope())
             {
-                var handler = (ICommandHandler<T>)scope.ServiceProvider.GetService(typeof(ICommandHandler<T>));
+                var handler = scope.Resolve<ICommandHandler<T>>();
                 handler.Handle(command);
             }
         }

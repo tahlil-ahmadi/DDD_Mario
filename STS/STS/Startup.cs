@@ -38,6 +38,7 @@ namespace STS
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseStaticFiles();
             app.UseIdentityServer();
             app.UseMvcWithDefaultRoute();
         }

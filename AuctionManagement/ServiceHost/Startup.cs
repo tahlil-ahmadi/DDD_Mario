@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using AuctionManagement.Config;
 using AuctionManagement.Gateways.RestApi;
+using Autofac;
 using IdentityServer4.AccessTokenValidation;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -25,19 +26,26 @@ namespace ServiceHost
         }
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddAuction();
-
-            services.AddMvc(a=>a.Filters.Add(new AuthorizeFilter()))
-                .AddApplicationPart(typeof(AuctionsController).Assembly)
-                .SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
-
             services.AddAuthentication(IdentityServerAuthenticationDefaults.AuthenticationScheme)
                 .AddIdentityServerAuthentication(options =>
                 {
                     options.Authority = "http://localhost:5000";
                     options.ApiName = "auction-api";
+                    options.RequireHttpsMetadata = false;
                 });
+
+            //services.AddMvc(a=>a.Filters.Add(new AuthorizeFilter()))
+            services.AddMvc()
+                .AddApplicationPart(typeof(AuctionsController).Assembly)
+                .SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+
+            
         }
+        public void ConfigureContainer(ContainerBuilder builder)
+        {
+            builder.RegisterModule(new AuctionModule());
+        }
+
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
             if (env.IsDevelopment())
@@ -45,6 +53,7 @@ namespace ServiceHost
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseAuthentication();
 
             //TODO: explain this to bacheha :D
             app.UseCors(builder => builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());

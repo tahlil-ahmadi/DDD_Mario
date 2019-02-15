@@ -1,5 +1,6 @@
 ﻿using NHibernate.Mapping.ByCode.Conformist;
 using PartyManagement.Domain.Model;
+using PartyManagement.Domain.Model.Parties;
 
 namespace PartyManagement.Persistence.NH.Mappings
 {
