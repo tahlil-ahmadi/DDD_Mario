@@ -1,11 +1,12 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using Framework.Domain;
+using PartyManagement.Domain.Model.Parties.Events;
 using PartyManagement.Domain.Model.Parties.States;
 
 namespace PartyManagement.Domain.Model.Parties
 {
-    public abstract class Party : Entity<long>
+    public abstract class Party : AggregateRoot<long>
     {
         private IList<Phone> _phones;
         public IReadOnlyCollection<Phone> Phones => new ReadOnlyCollection<Phone>(this._phones);
@@ -25,6 +26,7 @@ namespace PartyManagement.Domain.Model.Parties
         public void Confirm()
         {
             this.State = this.State.GotoConfirmed();
+            Publish(new PartyConfirmed(this.Id));
         }
         public void Reject()
         {
