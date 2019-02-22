@@ -4,7 +4,9 @@ using NHibernate;
 using NHibernate.Cfg;
 using NHibernate.Dialect;
 using NHibernate.Driver;
+using NHibernate.Event;
 using NHibernate.Mapping.ByCode;
+using PartyManagement.Persistence.NH.Framework;
 
 namespace PartyManagement.Persistence.NH
 {
@@ -31,7 +33,15 @@ namespace PartyManagement.Persistence.NH
             var mappingDocument = modelMapper.CompileMappingForAllExplicitlyAddedEntities();
             configuration.AddDeserializedMapping(mappingDocument, "AuctionManagement");
 
+            AddDomainEventListeners(configuration);
+
             return configuration.BuildSessionFactory();
+        }
+
+        private static void AddDomainEventListeners(Configuration configuration)
+        {
+            var listener = new DomainEventListener();
+            configuration.SetListeners(ListenerType.PreUpdate, new [] {listener});
         }
     }
 

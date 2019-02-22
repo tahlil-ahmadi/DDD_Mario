@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Framework.Core;
+﻿using Framework.Core;
 
-namespace PartyManagement.Domain.Model.Parties.Events
+namespace PartyManagement.Domain.Contracts.Events
 {
     public class PartyConfirmed : DomainEvent
     {

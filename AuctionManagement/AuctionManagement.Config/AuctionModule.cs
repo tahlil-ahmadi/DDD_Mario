@@ -21,8 +21,8 @@ namespace AuctionManagement.Config
             var factory = SessionFactoryConfigurator.Create(typeof(AuctionMapping).Assembly, connectionString);
             builder.Register<ISession>(a => factory.OpenSession()).OwnedByLifetimeScope();
             builder.RegisterType<AuctionRepository>().As<IAuctionRepository>().OwnedByLifetimeScope();
-            builder.RegisterType<AuctionService>().As<ICommandHandler<OpenAuctionCommand>>().OwnedByLifetimeScope();
-            builder.RegisterType<AuctionService>().As<ICommandHandler<PlaceBidCommand>>().OwnedByLifetimeScope();
+            builder.RegisterType<AuctionHandlers>().As<ICommandHandler<OpenAuctionCommand>>().OwnedByLifetimeScope();
+            builder.RegisterType<AuctionHandlers>().As<ICommandHandler<PlaceBidCommand>>().OwnedByLifetimeScope();
             builder.RegisterType<IocCommandBus>().As<ICommandBus>().SingleInstance();
         }
     }

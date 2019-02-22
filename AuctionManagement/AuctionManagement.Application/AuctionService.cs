@@ -5,11 +5,11 @@ using Framework.Application;
 
 namespace AuctionManagement.Application
 {
-    public class AuctionService : ICommandHandler<PlaceBidCommand>,
+    public class AuctionHandlers : ICommandHandler<PlaceBidCommand>,
                                   ICommandHandler<OpenAuctionCommand>
     {
         private readonly IAuctionRepository _repository;
-        public AuctionService(IAuctionRepository repository)
+        public AuctionHandlers(IAuctionRepository repository)
         {
             _repository = repository;
         }

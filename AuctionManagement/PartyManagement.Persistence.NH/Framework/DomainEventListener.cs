@@ -1,40 +1,38 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using Framework.Core;
 using Framework.Domain;
+using NHibernate;
 using NHibernate.Event;
 
 namespace PartyManagement.Persistence.NH.Framework
 {
-    public class DomainEventListener : IPreUpdateEventListener,
-                   IPreInsertEventListener
+    public class DomainEventListener : IPreUpdateEventListener
     {
-        public async Task<bool> OnPreUpdateAsync(PreUpdateEvent @event, CancellationToken cancellationToken)
+        public Task<bool> OnPreUpdateAsync(PreUpdateEvent @event, CancellationToken cancellationToken)
         {
-            if (@event.Entity is IAggregateRoot aggregateRoot)
-            {
-                var changes = aggregateRoot.GetChanges();
-                //save changes in database
-                return false;
-            }
-            return false;
+            throw new NotImplementedException();
         }
 
         public bool OnPreUpdate(PreUpdateEvent @event)
         {
-            throw new NotImplementedException();
+            if (@event.Entity is IAggregateRoot aggregateRoot)
+            {
+                var changes = aggregateRoot.GetChanges();
+                foreach (var domainEvent in changes)
+                {
+                    var command = SqlCommandFactory.FromEvent(domainEvent);
+                    command.Connection = (@event.Session as ISession).Connection as SqlConnection;
+                    @event.Session.Transaction.Enlist(command);
+                    command.ExecuteNonQuery();
+                }
+            }
+            return false;
         }
 
-        public Task<bool> OnPreInsertAsync(PreInsertEvent @event, CancellationToken cancellationToken)
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool OnPreInsert(PreInsertEvent @event)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

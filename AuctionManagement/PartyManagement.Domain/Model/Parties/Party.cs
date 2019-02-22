@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using Framework.Domain;
-using PartyManagement.Domain.Model.Parties.Events;
+using PartyManagement.Domain.Contracts.Events;
 using PartyManagement.Domain.Model.Parties.States;
 
 namespace PartyManagement.Domain.Model.Parties

@@ -17,7 +17,7 @@ namespace PartyManagement.Persistence.NH.Tests
             var session = factory.OpenSession();
 
             session.BeginTransaction();
-            var party = session.Get<IndividualParty>(2L);
+            var party = session.Get<IndividualParty>(1L);
             party.Confirm();
             session.Transaction.Commit();
         }
