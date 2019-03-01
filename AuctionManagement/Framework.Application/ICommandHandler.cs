@@ -2,6 +2,6 @@
 {
     public interface ICommandHandler<T>
     {
-        void Handle(T handle);
+        void Handle(T command);
     }
 }

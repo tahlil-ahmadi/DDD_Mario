@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using AuctionManagement.Domain.Contracts;
 using Framework.Domain;
 
 namespace AuctionManagement.Domain.Model.Auctions
 {
-    public class Auction : Entity<long>
+    public class Auction : AggregateRoot<long>
     {
         public string Product { get; private set; }
         public DateTime EndDateTime { get; private set; }
@@ -31,6 +32,7 @@ namespace AuctionManagement.Domain.Model.Auctions
             if (IsInvalidBidder(bid.BidderId)) throw new Exception("Invalid Bidder");
 
             this.WinningBid = bid;
+            this.Publish(new BidPlaced(this.Id, bid.BidderId, bid.Amount, bid.CreateDateTime));
         }
         private bool AuctionIsClosed()
         {

@@ -5,8 +5,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\AuctionManagement.Domain.Contracts\AuctionManagement.Domain.Contracts.csproj" />
     <ProjectReference Include="..\Framework.Core\Framework.Core.csproj" />
     <ProjectReference Include="..\Framework.Domain\Framework.Domain.csproj" />
+    <ProjectReference Include="..\PartyManagement.Domain.Contracts\PartyManagement.Domain.Contracts.csproj" />
   </ItemGroup>
 
 </Project>

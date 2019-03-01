@@ -16,7 +16,7 @@ namespace AuctionManagement.Application.NSB
         }
         public Task Handle(PartyConfirmed message, IMessageHandlerContext context)
         {
-            var command = new CreateParticipantCommand() {Id = message.PartyId};
+            var command = new CreateParticipantCommand {Id = message.PartyId};
             _commandBus.Dispatch(command);
             return Task.CompletedTask;
         }
