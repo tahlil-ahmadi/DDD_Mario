@@ -8,6 +8,7 @@ using AuctionManagement.Persistence.NH.Repositories;
 using Autofac;
 using Framework.Application;
 using Framework.Core;
+using Framework.Logging.SLog;
 using Framework.NH;
 using Microsoft.Extensions.DependencyInjection;
 using NHibernate;
@@ -34,6 +35,9 @@ namespace AuctionManagement.Config
             builder.RegisterGenericDecorator(typeof(TransactionalCommandHandlerDecorator<>), typeof(ICommandHandler<>));
             builder.RegisterType<IocCommandBus>().As<ICommandBus>().SingleInstance();
             builder.RegisterType<NhUnitOfWork>().As<IUnitOfWork>().OwnedByLifetimeScope();
+            builder.Register(a => new SerilogAdapter(SerilogConfig.Config(@"Logs\Log.txt")))
+                .As<ILogger>()
+                .SingleInstance();
         }
     }
 }

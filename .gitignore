@@ -261,6 +261,4 @@ __pycache__/
 *.pyc
 *.ncrunchsolution
 
-/Framework/build/tools/*
-!/Framework/build/tools/packages.config
-!/Framework/build/tools/packages.config.md5sum
+/AuctionManagement/ServiceHost/Logs

@@ -59,6 +59,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Framework.NH", "Framework.N
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AuctionManagement.DatabaseMigrations", "AuctionManagement.DatabaseMigrations\AuctionManagement.DatabaseMigrations.csproj", "{0DB05FF9-B05B-467C-A728-E8CB51C9F16C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Framework.Logging.SLog", "Framework.Logging.SLog\Framework.Logging.SLog.csproj", "{715DC5D7-B5DC-4630-980B-915D21E920CD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -141,6 +143,10 @@ Global
 		{0DB05FF9-B05B-467C-A728-E8CB51C9F16C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0DB05FF9-B05B-467C-A728-E8CB51C9F16C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0DB05FF9-B05B-467C-A728-E8CB51C9F16C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{715DC5D7-B5DC-4630-980B-915D21E920CD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{715DC5D7-B5DC-4630-980B-915D21E920CD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{715DC5D7-B5DC-4630-980B-915D21E920CD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{715DC5D7-B5DC-4630-980B-915D21E920CD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -170,6 +176,7 @@ Global
 		{964FCB7C-0E21-4D0C-A40F-1AAC169AE2F5} = {3FBF77AD-E1C8-47A1-841F-CEA198BD2C77}
 		{AEEA306A-CD03-48E4-B80F-A20B006EDF2A} = {006DC88F-BC64-4AE4-9FA1-E4A1442BB0E9}
 		{0DB05FF9-B05B-467C-A728-E8CB51C9F16C} = {E5008D5C-A6E5-4FC4-AFEE-B48C10E765EB}
+		{715DC5D7-B5DC-4630-980B-915D21E920CD} = {006DC88F-BC64-4AE4-9FA1-E4A1442BB0E9}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {CF854612-7F0C-4CA5-B947-AEEB0F8BBAFC}
