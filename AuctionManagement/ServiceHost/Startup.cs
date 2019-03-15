@@ -14,15 +14,18 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using ServiceHost.Configuration;
 
 namespace ServiceHost
 {
     public class Startup
     {
         public IConfiguration Configuration { get; }
+        public ServiceHostConfig ServiceHostConfig { get; private set; }
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
+            ServiceHostConfig = configuration.GetSection("ServiceHostConfig").Get<ServiceHostConfig>();
         }
         public void ConfigureServices(IServiceCollection services)
         {
@@ -43,7 +46,8 @@ namespace ServiceHost
         }
         public void ConfigureContainer(ContainerBuilder builder)
         {
-            builder.RegisterModule(new AuctionModule());
+            var auctionConfig = Configuration.GetSection("AuctionConfig").Get<AuctionConfig>();
+            builder.RegisterModule(new AuctionModule(auctionConfig));
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
@@ -54,9 +58,10 @@ namespace ServiceHost
             }
 
             app.UseAuthentication();
-
-            //TODO: explain this to bacheha :D
-            app.UseCors(builder => builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
+            app.UseCors(builder => builder
+                .WithOrigins(ServiceHostConfig.AllowedOrigins)
+                .AllowAnyHeader()
+                .AllowAnyMethod());
             app.UseMvcWithDefaultRoute();
         }
     }

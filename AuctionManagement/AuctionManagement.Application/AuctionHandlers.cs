@@ -13,14 +13,12 @@ namespace AuctionManagement.Application
         {
             _repository = repository;
         }
-
         public void Handle(OpenAuctionCommand command)
         {
             var id = _repository.GetNextId();
             var auction = new Auction(id, command.Product, command.EndDateTime, command.StartingPrice, command.SellerId);
             _repository.Add(auction);
         }
-
         public void Handle(PlaceBidCommand command)
         {
             var auction = _repository.Get(command.AuctionId);

@@ -7,6 +7,8 @@ using AuctionManagement.Persistence.NH.Mapping;
 using AuctionManagement.Persistence.NH.Repositories;
 using Autofac;
 using Framework.Application;
+using Framework.Core;
+using Framework.NH;
 using Microsoft.Extensions.DependencyInjection;
 using NHibernate;
 
@@ -14,16 +16,24 @@ namespace AuctionManagement.Config
 {
     public class AuctionModule : Module
     {
+        private readonly AuctionConfig _config;
+        public AuctionModule(AuctionConfig config)
+        {
+            _config = config;
+        }
         protected override void Load(ContainerBuilder builder)
         {
             //TODO: remove connection string from here
-            var connectionString = @"Data source=CLASS1\MSSQLSERVER1;Initial Catalog=Auction_DB;User Id=sa;password=123";
-            var factory = SessionFactoryConfigurator.Create(typeof(AuctionMapping).Assembly, connectionString);
-            builder.Register<ISession>(a => factory.OpenSession()).OwnedByLifetimeScope();
+            var factory = SessionFactoryConfigurator.Create(typeof(AuctionMapping).Assembly, _config.ConnectionString);
+            builder.Register(a => factory.OpenSession()).OwnedByLifetimeScope();
             builder.RegisterType<AuctionRepository>().As<IAuctionRepository>().OwnedByLifetimeScope();
             builder.RegisterType<AuctionHandlers>().As<ICommandHandler<OpenAuctionCommand>>().OwnedByLifetimeScope();
             builder.RegisterType<AuctionHandlers>().As<ICommandHandler<PlaceBidCommand>>().OwnedByLifetimeScope();
+
+            //TODO: remove configuration of framework from here
+            builder.RegisterGenericDecorator(typeof(TransactionalCommandHandlerDecorator<>), typeof(ICommandHandler<>));
             builder.RegisterType<IocCommandBus>().As<ICommandBus>().SingleInstance();
+            builder.RegisterType<NhUnitOfWork>().As<IUnitOfWork>().OwnedByLifetimeScope();
         }
     }
 }
