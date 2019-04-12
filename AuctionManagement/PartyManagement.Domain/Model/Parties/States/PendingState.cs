@@ -4,12 +4,12 @@
     {
         public override PartyState GotoConfirmed()
         {
-            return new ConfirmedState();
+            return PartyStateFactory.Create<ConfirmedState>();
         }
 
         public override PartyState GotoRejected()
         {
-            return new RejectedState();
+            return PartyStateFactory.Create<RejectedState>();
         }
     }
 }

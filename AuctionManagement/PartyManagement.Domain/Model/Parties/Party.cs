@@ -16,7 +16,7 @@ namespace PartyManagement.Domain.Model.Parties
         protected Party(long id)
         {
             this.Id = id;
-            this.State = new PendingState();
+            this.State = PartyStateFactory.Create<PendingState>();
         }
 
         public void AssignPhones(List<Phone> phones)
