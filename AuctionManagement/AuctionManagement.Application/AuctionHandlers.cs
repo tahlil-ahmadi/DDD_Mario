@@ -24,7 +24,6 @@ namespace AuctionManagement.Application
             var auction = _repository.Get(command.AuctionId);
             var bid = new Bid(command.BidderId, command.Amount);
             auction.PlaceBid(bid);
-            //...update auction
         }
     }
 }

@@ -19,13 +19,6 @@ namespace AuctionManagement.Gateways.RestApi
         [HttpPost]
         public void Post(OpenAuctionCommand command)
         {
-            command = new OpenAuctionCommand()
-            {
-                EndDateTime = DateTime.Now.AddDays(10),
-                Product = "X",
-                SellerId = 10,
-                StartingPrice = 1000
-            };
             _bus.Dispatch(command);
         }
 
