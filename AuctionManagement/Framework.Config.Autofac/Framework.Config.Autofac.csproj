@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="autofac" Version="4.9.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Framework.Application\Framework.Application.csproj" />
+    <ProjectReference Include="..\Framework.Core\Framework.Core.csproj" />
+    <ProjectReference Include="..\Framework.Domain\Framework.Domain.csproj" />
+    <ProjectReference Include="..\Framework.Logging.SLog\Framework.Logging.SLog.csproj" />
+    <ProjectReference Include="..\Framework.NH\Framework.NH.csproj" />
+  </ItemGroup>
+
+</Project>

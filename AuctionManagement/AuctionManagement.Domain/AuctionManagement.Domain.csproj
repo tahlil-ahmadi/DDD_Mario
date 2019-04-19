@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\AuctionManagement.Core\AuctionManagement.Core.csproj" />
     <ProjectReference Include="..\AuctionManagement.Domain.Contracts\AuctionManagement.Domain.Contracts.csproj" />
     <ProjectReference Include="..\Framework.Core\Framework.Core.csproj" />
     <ProjectReference Include="..\Framework.Domain\Framework.Domain.csproj" />

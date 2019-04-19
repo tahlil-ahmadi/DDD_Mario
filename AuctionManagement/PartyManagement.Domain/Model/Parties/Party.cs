@@ -10,6 +10,7 @@ namespace PartyManagement.Domain.Model.Parties
     {
         private IList<Phone> _phones;
         public IReadOnlyCollection<Phone> Phones => new ReadOnlyCollection<Phone>(this._phones);
+        public abstract string Name { get; }
         public PartyState State { get; private set; }
 
         protected Party() { }
@@ -26,7 +27,7 @@ namespace PartyManagement.Domain.Model.Parties
         public void Confirm()
         {
             this.State = this.State.GotoConfirmed();
-            Publish(new PartyConfirmed(this.Id));
+            Publish(new PartyConfirmed(Id,Name));
         }
         public void Reject()
         {

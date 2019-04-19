@@ -2,10 +2,14 @@
 {
     public class LegalParty : Party
     {
+        private string _name;
         public string RegistrationCode { get; private set; }
-        public LegalParty(string registrationCode)
+        public override string Name => _name;
+        public LegalParty(string registrationCode, string name)
         {
-            RegistrationCode = registrationCode;
+            this.RegistrationCode = registrationCode;
+            this._name = name;
         }
+
     }
 }

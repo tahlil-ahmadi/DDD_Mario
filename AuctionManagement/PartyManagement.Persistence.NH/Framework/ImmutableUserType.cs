@@ -4,7 +4,7 @@ using NHibernate.Engine;
 using NHibernate.SqlTypes;
 using NHibernate.UserTypes;
 
-namespace PartyManagement.Persistence.NH.Mappings
+namespace PartyManagement.Persistence.NH.Framework
 {
     public abstract class ImmutableUserType<T> : IUserType
     {

@@ -9,14 +9,10 @@ namespace Framework.Application
     {
         private readonly ICommandHandler<T> _commandHandler;
         private readonly IUnitOfWork _unitOfWork;
-        private readonly ILogger _logger;
-
-        public TransactionalCommandHandlerDecorator(ICommandHandler<T> commandHandler, 
-            IUnitOfWork unitOfWork, ILogger logger)
+        public TransactionalCommandHandlerDecorator(ICommandHandler<T> commandHandler, IUnitOfWork unitOfWork)
         {
             _commandHandler = commandHandler;
             _unitOfWork = unitOfWork;
-            _logger = logger;
         }
 
         public void Handle(T command)
@@ -27,9 +23,8 @@ namespace Framework.Application
                 _commandHandler.Handle(command);
                 _unitOfWork.Commit();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                _logger.LogError(ex);
                 _unitOfWork.Rollback();
                 throw;
             }

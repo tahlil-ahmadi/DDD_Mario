@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="nservicebus" Version="7.1.7" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\AuctionManagement.Domain.Contracts\AuctionManagement.Domain.Contracts.csproj" />
+    <ProjectReference Include="..\AuctionManagement.Query\AuctionManagement.Query.csproj" />
+  </ItemGroup>
+
+</Project>

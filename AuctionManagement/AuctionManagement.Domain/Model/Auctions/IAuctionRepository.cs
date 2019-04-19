@@ -7,7 +7,7 @@ namespace AuctionManagement.Domain.Model.Auctions
 {
     public interface IAuctionRepository
     {
-        long GetNextId();
+        AuctionId GetNextId();
         void Add(Auction auction);
         Auction Get(long id);
     }

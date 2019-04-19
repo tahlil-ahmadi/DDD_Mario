@@ -1,16 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Autofac;
+﻿using Autofac;
 using Framework.Application;
-using Microsoft.Extensions.DependencyInjection;
 
-namespace AuctionManagement.Config
+namespace Framework.Config.Autofac
 {
-    public class IocCommandBus : ICommandBus
+    public class AutofacCommandBus : ICommandBus
     {
         private readonly ILifetimeScope _lifetimeScope;
-        public IocCommandBus(ILifetimeScope lifetimeScope)
+        public AutofacCommandBus(ILifetimeScope lifetimeScope)
         {
             _lifetimeScope = lifetimeScope;
         }

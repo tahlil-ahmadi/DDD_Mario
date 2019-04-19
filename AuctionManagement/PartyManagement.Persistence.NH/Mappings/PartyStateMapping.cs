@@ -7,6 +7,7 @@ using NHibernate;
 using NHibernate.Engine;
 using NHibernate.SqlTypes;
 using PartyManagement.Domain.Model.Parties.States;
+using PartyManagement.Persistence.NH.Framework;
 
 namespace PartyManagement.Persistence.NH.Mappings
 {

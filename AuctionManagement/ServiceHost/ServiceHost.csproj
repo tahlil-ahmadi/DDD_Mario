@@ -19,6 +19,7 @@
   <ItemGroup>
     <ProjectReference Include="..\AuctionManagement.Config\AuctionManagement.Config.csproj" />
     <ProjectReference Include="..\AuctionManagement.Gateways.RestApi\AuctionManagement.Gateways.RestApi.csproj" />
+    <ProjectReference Include="..\Framework.Config.Autofac\Framework.Config.Autofac.csproj" />
   </ItemGroup>
 
 </Project>

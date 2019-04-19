@@ -13,7 +13,10 @@ namespace AuctionManagement.Persistence.NH.Mapping
         {
             Lazy(false);
             Table("Auctions");
-            Id(a=>a.Id);
+            ComponentAsId(a=> a.Id, map =>
+            {
+                map.Property(a=>a.DbId, a=> a.Column("Id"));
+            });
             Property(a=>a.Product);
             Property(a=>a.EndDateTime);
             Property(a=>a.SellerId);

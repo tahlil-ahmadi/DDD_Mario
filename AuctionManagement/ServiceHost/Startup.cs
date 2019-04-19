@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using AuctionManagement.Config;
 using AuctionManagement.Gateways.RestApi;
 using Autofac;
+using Framework.Config.Autofac;
 using IdentityServer4.AccessTokenValidation;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -15,6 +16,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using ServiceHost.Configuration;
+using ServiceHost.Filters;
 
 namespace ServiceHost
 {
@@ -37,8 +39,8 @@ namespace ServiceHost
                     options.RequireHttpsMetadata = false;
                 });
 
-            //services.AddMvc(a=>a.Filters.Add(new AuthorizeFilter()))
-            services.AddMvc()
+            //services.AddMvc(a => a.Filters.Add(new AuthorizeFilter()));
+            services.AddMvc(a=> a.Filters.Add(new CustomExceptionFilterAttribute()))
                 .AddApplicationPart(typeof(AuctionsController).Assembly)
                 .SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
@@ -48,6 +50,7 @@ namespace ServiceHost
         {
             var auctionConfig = Configuration.GetSection("AuctionConfig").Get<AuctionConfig>();
             builder.RegisterModule(new AuctionModule(auctionConfig));
+            builder.RegisterModule(new FrameworkModule());
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)

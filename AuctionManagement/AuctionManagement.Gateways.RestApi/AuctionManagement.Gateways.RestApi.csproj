@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="AuctionsController.cs~RF4a5df3d.TMP" />
     <None Remove="AuctionsController.cs~RFf631f0.TMP" />
   </ItemGroup>
 

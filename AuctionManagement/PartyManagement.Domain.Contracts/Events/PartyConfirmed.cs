@@ -5,9 +5,11 @@ namespace PartyManagement.Domain.Contracts.Events
     public class PartyConfirmed : DomainEvent
     {
         public long PartyId { get; private set; }
-        public PartyConfirmed(long partyId)
+        public string Name { get; private set; }
+        public PartyConfirmed(long partyId, string name)
         {
-            PartyId = partyId;
+            this.PartyId = partyId;
+            this.Name = name;
         }
     }
 }
